@@ -1,0 +1,51 @@
+{
+  "testedAt": "2026-09-12T11:57:13.838Z",
+  "environment": "Managed Chromium preview at http://terminal.local:4173/",
+  "scope": "Targeted browser interactions using synthetic learner QA-FIX-01. Hardware audio and physical mobile devices were not retested.",
+  "results": [
+    {
+      "test": "Learner persists after coordinated save/reload",
+      "status": "Pass"
+    },
+    {
+      "test": "DEF-10 punctuation passage",
+      "status": "Pass",
+      "actual": "Punctuation-only passage rejected; recording and manual scoring disabled."
+    },
+    {
+      "id": "DEF-01",
+      "status": "Pass",
+      "evidence": "Editing the compared transcript cleared all word marks and blocked the old result."
+    },
+    {
+      "id": "Reviewed-reading",
+      "status": "Pass",
+      "evidence": "Recomparison produced 10 CWPM / 100%; acknowledgement was required; save appeared in the report."
+    },
+    {
+      "id": "DEF-17",
+      "status": "Pass",
+      "evidence": "Saving a Hindi connected-story reading from an English-level-1 report switched the report to Hindi level 2 and displayed 77 CWPM."
+    },
+    {
+      "id": "DEF-18",
+      "status": "Pass",
+      "evidence": "Export report explains that the CSV includes all languages and levels and labels the download accordingly."
+    },
+    {
+      "id": "DEF-02",
+      "status": "Pass",
+      "evidence": "A wrong choice marked score 2 was rejected as Invalid backup; learner and session counts remained 1 / 2."
+    },
+    {
+      "id": "DEF-09",
+      "status": "Pass",
+      "evidence": "A different learner ID with a case/space variant of the saved code was rejected with Learner code conflict."
+    },
+    {
+      "id": "Pause-resume-complete",
+      "status": "Pass",
+      "evidence": "A Hindi sounds check resumed at question 2 after reload, saved one independent and one supported answer, then remained in Progress with no draft banner after another reload."
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#292d61"><title>Read aloud · Language Studio</title><link rel="stylesheet" href="/style.css"></head>
+<body data-step="read">
+<header class="standalone-header"><strong>Reading Studio</strong><button class="quiet" id="historyBtn">Reading history <span id="historyCount">0</span></button><button id="demoBtn" class="text-btn">Try a sample</button></header>
+<main>
+<ol class="reading-steps" aria-label="Reading steps"><li id="stepRead" aria-current="step"><b>1</b> Read</li><li id="stepReview"><b>2</b> Review words</li><li id="stepSave"><b>3</b> Save</li></ol>
+<section id="readingOptions" class="options-panel" aria-label="Passage settings">
+<div class="setup-heading"><h2>Choose a passage</h2><span id="readingContext"></span></div>
+<div class="setup-grid"><div class="learner-field"><label for="student">Learner code</label><input id="student" maxlength="40" placeholder="e.g. Reader 01" autocomplete="off"></div><div><label for="language">Language</label><select id="language"><option value="en-IN">English</option><option value="hi-IN">हिन्दी · Hindi</option></select></div><div><label for="level">Passage</label><select id="level"><option value="1">Short sentences</option><option value="2" selected>Connected story</option><option value="3">Longer story</option><option value="custom">My own passage</option></select></div><div><label for="duration">Reading time</label><select id="duration"><option value="60">60 seconds</option><option value="120">120 seconds</option><option value="0">Until I stop</option></select></div></div>
+<div id="customWrap" hidden><label for="custom">Your passage</label><textarea id="custom" rows="5" maxlength="6000" placeholder="Paste up to 500 words"></textarea><button id="applyCustom" class="secondary">Use passage</button></div>
+<details class="transcription-options"><summary>Automatic transcript · optional</summary><label class="check-label"><input type="checkbox" id="useRecognition"><span>Use optional online transcription</span></label><p class="field-note">Off by default. Only enable with permission for the browser’s speech service to process audio online. You’ll still review every word.</p></details>
+</section>
+<p id="notice" class="notice" role="status" aria-live="polite"></p>
+<section id="scoringTools" class="scoring-tools" hidden aria-label="Word scoring tools">
+  <h2>Review what you heard</h2>
+  <p id="wordToolHelp">First, select the last word the learner read.</p>
+  <div class="word-tool-buttons" role="group" aria-label="Choose how to mark words"><button id="scoreEnd" aria-pressed="true">1. Last word read</button><button id="scoreError" aria-pressed="false">Incorrect</button><button id="scoreSkipped" aria-pressed="false">Skipped</button><button id="scoreCorrect" aria-pressed="false">Correct</button></div>
+</section>
+<section class="reading panel">
+  <div class="reading-header"><div><span id="passageLevel" class="eyebrow"></span><h2 id="readingLabel">Read aloud</h2></div><div class="reading-tools"><button id="fontDown" class="icon-btn" aria-label="Smaller passage text">A−</button><button id="fontUp" class="icon-btn" aria-label="Larger passage text">A+</button></div></div>
+  <div class="story-meta"><span id="wordCount"></span><span id="sampleBadge" class="sample" hidden>SAMPLE DATA</span></div><h3 id="passageTitle"></h3><div id="passage" class="passage" aria-label="Reading passage"></div>
+  <div id="legend" class="legend" hidden><div><span><i class="correct"></i>Correct</span><span><i class="error"></i>Incorrect</span><span><i class="skipped"></i>Skipped</span><span><i class="unread"></i>Not reached</span></div><small>Words after the last word read are not scored.</small></div>
+  <div class="recording-area"><div class="record-state"><div><strong id="recordTitle">Ready when they are</strong><p id="recordSubtitle">Start recording, then ask the learner to read.</p></div><div class="timer" id="timer">00:00</div></div><span id="micOrb" hidden></span><button id="recordBtn" class="primary full">Start reading</button><div class="record-footer"><button id="manualBtn" class="text-btn">Score without a microphone</button><span id="recognitionStatus"></span></div></div>
+</section>
+<section id="reviewPanel" class="panel review-panel" hidden>
+  <div class="section-heading"><h2>Check the time, then continue</h2><button id="allCorrect" class="text-btn">Mark all words correct</button></div>
+  <p>Use the recording or what you heard to check the marks above.</p>
+  <audio id="audio" controls hidden></audio><a id="downloadAudio" class="text-btn" hidden>Download recording</a>
+  <div class="time-field"><label for="seconds">Actual reading time <span>seconds</span></label><input id="seconds" type="number" min="1" max="3600" step="0.1" value="60"></div>
+  <details><summary>Use or edit a transcript</summary><label for="transcript">What the learner said</label><textarea id="transcript" rows="4" maxlength="6000" placeholder="Type exactly what they said, or correct the automatic transcript."></textarea><button class="secondary" id="alignBtn">Compare with passage</button><p class="field-note" id="extras"></p></details>
+  <button id="finishReview" class="primary full">See reading result</button>
+</section>
+<section class="insights panel">
+  <div id="emptyInsights" hidden><p>Complete a reading to see the result.</p></div>
+  <div id="results" hidden>
+    <span class="review-badge" id="reviewBadge">REVIEW NEEDED</span><h2>Your reading result</h2>
+    <div class="result-metrics"><div><strong id="cwpm">0</strong><span>correct words / min</span></div><div><strong id="accuracy">0%</strong><span>accuracy</span></div></div>
+    <div class="accuracy-track"><div id="accuracyFill"></div></div>
+    <div class="counts"><div><strong id="correctCount">0</strong><span>Correct</span></div><div><strong id="errorCount">0</strong><span>Incorrect</span></div><div><strong id="skipCount">0</strong><span>Skipped</span></div></div>
+    <p class="field-note" id="coverage"></p>
+    <div class="next-step"><span class="eyebrow">NEXT TO PRACTISE</span><h3 id="nextTitle"></h3><p id="nextCopy"></p><div id="practiceWords"></div></div>
+    <label class="check-label"><input type="checkbox" id="reviewed"><span>I checked these word scores against the recording or what I heard.</span></label>
+    <button id="saveBtn" class="primary full" disabled>Save reading</button>
+    <p class="field-note">Saves scores and the reviewed transcript in this browser. The recording is not saved automatically.</p>
+    <button id="returnToProgress" class="primary full" hidden>See learner progress</button>
+    <div class="button-row"><button id="editWords" class="secondary">Back to word scores</button><button id="resetBtn" class="text-btn">Start another reading</button></div>
+  </div>
+</section>
+<p class="footnote">An adult reviews every reading. Scores are not age or grade benchmarks.</p>
+</main>
+<dialog id="historyDialog"><div class="dialog-head"><h2>Reading history</h2><button id="closeHistory" class="icon-btn" aria-label="Close history">×</button></div><p>Compare readings with similar passages and conditions.</p><div class="table-scroll"><table><thead><tr><th>Learner</th><th>Date</th><th>Passage</th><th>Correct / min</th><th>Accuracy</th></tr></thead><tbody id="historyBody"></tbody></table></div><div class="button-row"><button id="exportBtn" class="secondary">Export CSV</button><button id="clearHistory" class="text-btn danger">Clear device history</button></div></dialog><script type="module" src="/app.js"></script></body></html>

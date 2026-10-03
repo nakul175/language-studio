@@ -1,0 +1,1 @@
+ALTER TABLE `users` ADD `device_recovery_key` text;
